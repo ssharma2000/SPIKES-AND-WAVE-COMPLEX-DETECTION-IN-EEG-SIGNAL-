@@ -1,0 +1,58 @@
+#importing libraries
+#pandas->for reading the dataset
+#numpy->for storing data as array
+#matplotlib->for displaying th graph
+
+
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+
+
+
+#reading dataset using panda library.
+# we have 10 channels of eeg signals
+
+c3 = pd.read_csv('eeg2-c3.dat')
+c4 = pd.read_csv('eeg2-c4.dat')
+f3 = pd.read_csv('eeg2-f3.dat')
+f4 = pd.read_csv('eeg2-f4.dat')
+o3 = pd.read_csv('eeg2-o1.dat')
+o4 = pd.read_csv('eeg2-o2.dat')
+p3 = pd.read_csv('eeg2-p3.dat')
+p4 = pd.read_csv('eeg2-p4.dat')
+t3 = pd.read_csv('eeg2-t3.dat')
+t4 = pd.read_csv('eeg2-t4.dat')
+
+
+
+
+#reading values of each channel
+
+eeg2_c3 = c3.values
+eeg2_c4 = c4.values
+eeg2_f3 = f3.values
+eeg2_f4 = f4.values
+eeg2_o3 = o3.values
+eeg2_o4 = o4.values
+eeg2_p3 = p3.values
+eeg2_p4 = p4.values
+eeg2_t3 = t3.values
+eeg2_t4 = t4.values
+
+
+
+
+
+
+
+
+
+#sampling frequency of 100Hz for eeg analysis and corresponding time interval 
+
+fs = 100
+t = np.arange(0,len(eeg2_f3))/fs
+
+
+
+
