@@ -42,16 +42,120 @@ eeg2_t4 = t4.values
 
 
 
-
-
-
-
-
-
 #sampling frequency of 100Hz for eeg analysis and corresponding time interval 
 
 fs = 100
 t = np.arange(0,len(eeg2_f3))/fs
+
+#plotting all the channel signal with specified fig size
+
+plt.figure(figsize=(20,50))
+# C3 CHANNEL
+plt.subplot(5,2,1)
+plt.plot(t,eeg2_c3)
+plt.title('eeg2-c3 signal')
+plt.xlabel('time')
+plt.ylabel('magnitude')
+# C4 CHANNEL
+plt.subplot(5,2,2)
+plt.plot(t,eeg2_c4)
+plt.title('eeg2-c4 signal')
+plt.xlabel('time')
+plt.ylabel('magnitude')
+# F3 CHANNEL
+plt.subplot(5,2,3)
+plt.plot(t,eeg2_f4)
+plt.title('eeg2-f3 signal')
+plt.xlabel('time')
+plt.ylabel('magnitude')
+# F4 CHANNEL
+plt.subplot(5,2,4)
+plt.plot(t,eeg2_f4)
+plt.title('eeg2-f4 signal')
+plt.xlabel('time')
+plt.ylabel('magnitude')
+# O3 CHANNEL
+plt.subplot(5,2,5)
+plt.plot(t,eeg2_o3)
+plt.title('eeg2-o3 signal')
+plt.xlabel('time')
+plt.ylabel('magnitude')
+# O4 CHANNEL
+plt.subplot(5,2,6)
+plt.plot(t,eeg2_o4)
+plt.title('eeg2-o4 signal')
+plt.xlabel('time')
+plt.ylabel('magnitude')
+# P3 CHANNEL
+plt.subplot(5,2,7)
+plt.plot(t,eeg2_p3)
+plt.title('eeg2-p3 signal')
+plt.xlabel('time')
+plt.ylabel('magnitude')
+# P4 CHANNEL
+plt.subplot(5,2,8)
+plt.plot(t,eeg2_p4)
+plt.title('eeg2-p4 signal')
+plt.xlabel('time')
+plt.ylabel('magnitude')
+# T3 CHANNEL
+plt.subplot(5,2,9)
+plt.plot(t,eeg2_t3)
+plt.title('eeg2-t3 signal')
+plt.xlabel('time')
+plt.ylabel('magnitude')
+# T4 CHANNEL
+plt.subplot(5,2,10)
+plt.plot(t,eeg2_t4)
+plt.title('eeg2-t4 signal')
+plt.xlabel('time')
+plt.ylabel('magnitude')
+plt.show()
+
+
+
+#getting a template from f3 channel
+
+template = eeg2_f3[45:65]
+plt.figure(figsize=(15,8))
+plt.plot(template)
+plt.show()
+
+
+
+
+
+#correlating template with same channel ,that is ,f3
+
+from scipy.signal import correlate
+ccf = correlate(eeg2_f3,template)
+plt.figure(figsize=(20,10))
+plt.plot(ccf)
+plt.show()
+
+
+
+#ccf=ccf.flatten()
+#ccf.shape
+
+t2 = np.arange(0,ccf.size)/fs
+
+
+
+#simple  correlation of f3 signal
+
+from scipy.signal import find_peaks
+peaks, _ = find_peaks(ccf)
+plt.figure(figsize=(15,8))
+plt.plot(t2,ccf)
+plt.plot(t2[peaks],ccf[peaks], "D",color='red')
+plt.plot(t2,np.zeros_like(t2), "--", color="red")
+plt.title('simple  correlation eeg2-f3 signal')
+plt.xlabel('time')
+plt.ylabel('magnitude')
+plt.show()
+
+
 
 
 
