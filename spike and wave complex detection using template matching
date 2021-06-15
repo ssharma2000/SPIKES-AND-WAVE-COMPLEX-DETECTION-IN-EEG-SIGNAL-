@@ -157,6 +157,37 @@ plt.show()
 
 
 
+a=(eeg2_f3-np.mean(eeg2_f3))/(np.std(eeg2_f3)*len(eeg2_f3))
+b=(template-np.mean(template))/(np.std(template)*len(template))
+
+from scipy.signal import correlate
+ccf_f3 = correlate(a,b,'same')
+plt.figure(figsize=(15,8))
+plt.plot(ccf_f3)
+plt.show()
+
+
+
+ccf_f3 = ccf_f3.flatten()
+ccf_f3.shape
+
+
+t3 = np.arange(0,ccf_f3.size)/fs
+
+from scipy.signal import find_peaks
+peaks, _ = find_peaks(ccf_f3, height=0)
+plt.figure(figsize=(10,8))
+plt.plot(t3,ccf_f3)
+plt.plot(t3[peaks],ccf_f3[peaks], "D",color='red')
+plt.plot(t3,np.zeros_like(t3), "--", color="red")
+plt.title('normalise cross correlation eeg2-f3 signal')
+plt.xlabel('time')
+plt.ylabel('magnitude')
+plt.show()
+
+
+
+
 
 
 
